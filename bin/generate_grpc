@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+# Diretórios
+PROTO_DIR = File.join(File.dirname(__FILE__), '..', 'protos')
+OUTPUT_DIR = File.join(File.dirname(__FILE__), '..', 'app', 'services', 'grpc')
+
+# Cria o diretório de saída se não existir
+FileUtils.mkdir_p(OUTPUT_DIR)
+
+# Gera os arquivos Ruby a partir do proto
+system("grpc_tools_ruby_protoc -I #{PROTO_DIR} --ruby_out=#{OUTPUT_DIR} --grpc_out=#{OUTPUT_DIR} #{File.join(PROTO_DIR, 'patient.proto')}")
+
+puts "Arquivos gRPC gerados com sucesso!" 

@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package patient;
+
+// Serviço para consulta de pacientes (Server A)
+service PatientQueryService {
+  rpc ListPatients(ListPatientsRequest) returns (ListPatientsResponse);
+  rpc GetPatient(GetPatientRequest) returns (GetPatientResponse);
+}
+
+// Serviço para manipulação de pacientes (Server B)
+service PatientMutationService {
+  rpc CreatePatient(CreatePatientRequest) returns (CreatePatientResponse);
+  rpc UpdatePatient(UpdatePatientRequest) returns (UpdatePatientResponse);
+}
+
+// Mensagens para consulta
+message ListPatientsRequest {}
+
+message ListPatientsResponse {
+  repeated Patient patients = 1;
+}
+
+message GetPatientRequest {
+  int32 id = 1;
+}
+
+message GetPatientResponse {
+  Patient patient = 1;
+}
+
+// Mensagens para mutação
+message CreatePatientRequest {
+  string name = 1;
+  string birth_date = 2;
+  string cpf = 3;
+  string sexo = 4;
+  string numero = 5;
+}
+
+message CreatePatientResponse {
+  Patient patient = 1;
+}
+
+message UpdatePatientRequest {
+  int32 id = 1;
+  string name = 2;
+  string birth_date = 3;
+  string cpf = 4;
+  string sexo = 5;
+  string numero = 6;
+}
+
+message UpdatePatientResponse {
+  Patient patient = 1;
+}
+
+// Mensagem do paciente
+message Patient {
+  int32 id = 1;
+  string name = 2;
+  string birth_date = 3;
+  string cpf = 4;
+  string sexo = 5;
+  string numero = 6;
+  string created_at = 7;
+  string updated_at = 8;
+} 

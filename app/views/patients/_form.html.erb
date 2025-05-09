@@ -1,0 +1,45 @@
+<%= form_with(model: patient, local: true, class: 'needs-validation', novalidate: true) do |form| %>
+  <% if patient.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(patient.errors.count, "erro") %> impediram este paciente de ser salvo:</h2>
+      <ul>
+        <% patient.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, 'Nome', class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control', required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :cpf, 'CPF', class: 'form-label' %>
+    <%= form.text_field :cpf, class: 'form-control', required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :birth_date, 'Data de Nascimento', class: 'form-label' %>
+    <%= form.date_field :birth_date, class: 'form-control', required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :sexo, 'Sexo', class: 'form-label' %>
+    <%= form.select :sexo, 
+        options_for_select([['Masculino', 'M'], ['Feminino', 'F']], patient.sexo),
+        { include_blank: 'Selecione...' },
+        { class: 'form-select', required: true } %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :numero, 'Número', class: 'form-label' %>
+    <%= form.text_field :numero, class: 'form-control', required: true %>
+  </div>
+
+  <div class="mt-4">
+    <%= form.submit class: 'btn btn-primary' %>
+    <%= link_to 'Voltar', patients_path, class: 'btn btn-secondary' %>
+  </div>
+<% end %> 

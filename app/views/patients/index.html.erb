@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Pacientes</h1>
+    <%= link_to 'Novo Paciente', new_patient_path, class: 'btn btn-primary' %>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Data de Nascimento</th>
+          <th>Sexo</th>
+          <th>Número</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @patients.each do |patient| %>
+          <tr>
+            <td><%= patient.name %></td>
+            <td><%= patient.cpf %></td>
+            <td><%= patient.birth_date&.strftime("%d/%m/%Y") %></td>
+            <td><%= patient.sexo %></td>
+            <td><%= patient.numero %></td>
+            <td>
+              <%= link_to 'Ver', patient_path(patient), class: 'btn btn-info btn-sm' %>
+              <%= link_to 'Editar', edit_patient_path(patient), class: 'btn btn-warning btn-sm' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div> 
